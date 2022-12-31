@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "production-vdsc",
+    "private_key_id": "f1f0a41880035d1fdc4e600ece9aa7e28565121d",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCzizElB+teOfol\nGA2icPaGQGp6zW63RVu9cP04C6vo0+89cJBTwGD15RuHTPqkG8KTCcDe/EygdQmg\nsE2rTrk2jtwUAzc++CMtz6qDA2GR2VVq++FabUm3of3UkAQUJ4lRqowDb+Sf56Gk\nybbtkIfIfNy1XlA9gOFu7U476cMANvm7pSLmXWUkAzJJT5S4UmJw88drnY71jepp\nSD0ZkOeQlzrplKR0rdOTqUROrzVlAFtNyyCR5hmhSxHt8mN91hWGfxePX/NoaOCV\nP4XYqXa6F4wLv85e6baExdisH3PZiRcEl+QKOtQpH25DWSjQ+CIfxTvZL8fyFZqa\nDpjN//S/AgMBAAECggEADPiSsFjbdDnpYcypuivsY36RMsCsrajhG9U8i1QB3hbm\n7cq4DT+Uwa8E8h1pmM7jRmQp/vITRx8CzGJwT16nRX3EqzLK8aL+R6JScJdJ8T4r\noZ2uMNjnE9EsLrMeLaaS5nIqc1pzaz9SD5RTFuPzgKnPTXsRfkqqqVeTk1iBXKkn\nxg9Zg4cd0rr/YuGE+qwtWV++L3XiU8Dpus7NcOzImraiaisc197wWjqCOkHKut3D\nOhTC4/711QLDxPw3nhPjdZbFsT7uut5Z+bh/iFktb8M3Mqhuv0mgJDSCyDEbydVV\nJ+I7dVk4hjgaoSZ5TnjdS3WdadaE3xRyv1TI7EUPgQKBgQDdT+CHua2PeFOAYOHH\n66Ksv8cydE8RkTQuLjZk+hlvsBgDbOsHOFkgn6unjNmT/UIQHr755M7GOUrS6XrT\nGat+9QxAkD2WQgh0MgqtUI9U+fRSK6cqv2C/nJqZpOf4j4dofKPCPIgnWPjpdS1s\ns69ycJn5dDZH/ZMVk7D11nX+DwKBgQDPr12uaW04aM/zMbKn4LzUUc8aF3S/DTtg\nU/whhxZZaLh4HEO6odlDy642xvO2NFCZoPQ8aDcFCx0c7mhR6EQrgNGbqeMj4h5p\nyc3m+fg5WJPj+/GiH9ba6H5+3TFa1SgEeLQBYnW6Uxu7KtJseSgKgMzqU7+JBj7M\nVg2Zrp5OUQKBgG0f5Mun34+9uha0LsBATR83FQao2RAFdCBNQx75Py+WOdD+lMkj\nnLb8ZEyio+pX14pRTsOzcc3GFEH5REnw/2IDfH4dYXDEsJxyzFb3QSWadkFKKwxl\n/1Ob6ZNW/9bNFuyLgMfWxx/3vAyJbdOKqjkYkqOxDM7klvDtuTUPAXE7AoGBAIx5\naTwXQzDsc/timhzC/fX+f75+LxEqugalx9xFqvA+zMcxFv6din84vVV/rEiJihrf\nq1NQiiZ3JfHzr8v29mUWdLB9cI1M3JVhUkvwt9zR9PY363BlaMYYi7bzlfaCRtb/\nbYGiP08P96nZhQqpyFOSWwgELYFZIBDGA9z3J0yBAoGBAJpeUjle37E8pcSGBGOz\n75sSwDaxq6Sn/N0LmZKXbOwL+QFkuCOi5j0jjP0D/2PHlM/4lomi3qKCgaEU/dmM\nHIyxzJL0pBXeWCy9SLY6MvYDON/z+ojebcwjCU8IiAn8kbAjkhJrCd0BASS38jHz\nx65H8+gNgKN4tyvvOBE4+1dn\n-----END PRIVATE KEY-----\n",
+    "client_email": "smart-dragon@production-vdsc.iam.gserviceaccount.com",
+    "client_id": "108703945430642773145",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/smart-dragon%40production-vdsc.iam.gserviceaccount.com"
+  }
