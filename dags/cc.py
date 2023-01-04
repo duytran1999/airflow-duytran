@@ -42,8 +42,8 @@ with DAG(
         dag_id="celery_executor_demo",
     start_date=datetime(2021, 1, 1),
         schedule="*/1 * * * *",
-        catchup=False,
-        max_active_runs=1, max_active_tasks=10,
+        max_active_runs= 1,max_active_tasks=1,
+    catchup=False,
         tags=["duytran_test"]
 ) as dag:
 

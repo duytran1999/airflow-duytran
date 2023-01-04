@@ -5,9 +5,7 @@ import time
 import random
 
 import dask.dataframe as dd
-import pandas as pd 
-
-
+import pandas as pd
 
 
 def hello_function():
@@ -21,8 +19,9 @@ def last_function():
 
 def sleeping_function():
     print("Sleeping for 5 seconds")
-    rand_number = random.randrange(15,20)
+    rand_number = random.randrange(15, 20)
     time.sleep(rand_number)
+
 
 def handle_parquet():
     df = dd.read_csv('./dags/data_.csv')
@@ -35,17 +34,19 @@ def handle_parquet():
 
 def handle_large_parquet():
     temp = dd.read_parquet("./dags/train_data_parquet")
-    result = temp[temp['customer_ID'] == '0000099d6bd597052cdcda90ffabf56573fe9d7c79be5fbac11a8ed792feb62a'].compute()
+    result = temp[temp['customer_ID'] ==
+                  '0000099d6bd597052cdcda90ffabf56573fe9d7c79be5fbac11a8ed792feb62a'].compute()
     print(result)
+
 
 with DAG(
         dag_id="celery_executor_demo_cc",
     start_date=datetime(2021, 1, 1),
         schedule="*/1 * * * *",
-        catchup=False,
-        max_active_runs= 1,max_active_tasks=10,
+        max_active_runs=1, max_active_tasks=1,
+    catchup=False,
         tags=["duytran_test"]
-        ) as dag:
+) as dag:
 
     task1 = PythonOperator(
         task_id="start_1",

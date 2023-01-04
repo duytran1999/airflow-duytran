@@ -79,7 +79,6 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
-        mem_limit: 1gb
 
     airflow-scheduler:
         <<: *airflow-common
@@ -98,7 +97,6 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
-        mem_limit: 1gb
 
     airflow-worker:
         <<: *airflow-common
@@ -120,7 +118,6 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
-        mem_limit: 4gb
 
     airflow-triggerer:
         <<: *airflow-common
@@ -139,7 +136,6 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
-        mem_limit: 1gb
 
     airflow-init:
         <<: *airflow-common
@@ -218,7 +214,6 @@ services:
         user: "0:0"
         volumes:
             - .:/sources
-        mem_limit: 1gb
 
     airflow-cli:
         <<: *airflow-common
