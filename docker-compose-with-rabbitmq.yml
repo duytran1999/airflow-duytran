@@ -13,7 +13,7 @@ x-airflow-common:
         # For backward compatibility, with Airflow <2.3
         AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
         AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
-        AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+        AIRFLOW__CELERY__BROKER_URL: amqp://guest:guest@rabbitmq//
         AIRFLOW__CORE__FERNET_KEY: ''
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
         AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
@@ -27,7 +27,7 @@ x-airflow-common:
     user: "${AIRFLOW_UID:-50000}:0"
     depends_on:
         &airflow-common-depends-on
-        redis:
+        rabbitmq:
             condition: service_healthy
         postgres:
             condition: service_healthy
@@ -47,22 +47,24 @@ services:
             retries: 5
         restart: always
 
-    redis:
-        image: redis:latest
-        expose:
-            - 6379
+    rabbitmq:
+        image: rabbitmq:management
+        ports:
+          - '5672:5672'
+          - '15672:15672'
+    
         healthcheck:
-            test: [ "CMD", "redis-cli", "ping" ]
-            interval: 5s
-            timeout: 30s
-            retries: 50
+          test: rabbitmq-diagnostics -q ping
+          interval: 30s
+          timeout: 30s
+          retries: 3
         restart: always
 
     airflow-webserver:
         <<: *airflow-common
         command: webserver
         ports:
-            - 9191:8080
+            - 1812:8080
         healthcheck:
             test:
                 [
@@ -258,7 +260,7 @@ services:
         profiles:
             - flower
         ports:
-            - 5555:5555
+            - 1813:5555
         healthcheck:
             test: [ "CMD", "curl", "--fail", "http://localhost:5555/" ]
             interval: 10s
@@ -273,4 +275,4 @@ services:
 volumes:
     postgres-db-volume:
 
-        #docker-compose --profile flower up  
+        # docker-compose -f docker-compose-with-rabbitmq.yml --profile flower up  
