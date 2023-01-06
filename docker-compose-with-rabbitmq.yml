@@ -81,6 +81,14 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
+        deploy:
+            resources:
+                limits:
+                    cpus: '1'
+                    memory: 1G
+                reservations:
+                    cpus: '0.5'
+                    memory: 1G
 
     airflow-scheduler:
         <<: *airflow-common
@@ -99,6 +107,14 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
+        deploy:
+            resources:
+                limits:
+                    cpus: '1'
+                    memory: 1G
+                reservations:
+                    cpus: '1'
+                    memory: 1G
 
     airflow-worker-1:
         <<: *airflow-common
@@ -118,11 +134,51 @@ services:
             # See https://airflow.apache.org/docs/docker-stack/entrypoint.html#signal-propagation
             DUMB_INIT_SETSID: "0"
         restart: always
+
         depends_on:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
+        deploy:
+            resources:
+                limits:
+                    cpus: '2'
+                    memory: 2G
+                reservations:
+                    cpus: '2'
+                    memory: 2G
 
+    airflow-worker-2:
+        <<: *airflow-common
+        command: celery worker
+            # - export DOCKER_HOST=tcp://docker-socket-proxy:2375
+        healthcheck:
+            test:
+                - "CMD-SHELL"
+                - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
+            interval: 10s
+            timeout: 10s
+            retries: 5
+        
+        environment:
+            <<: *airflow-common-env
+            # Required to handle warm shutdown of the celery workers properly
+            # See https://airflow.apache.org/docs/docker-stack/entrypoint.html#signal-propagation
+            DUMB_INIT_SETSID: "0"
+        restart: always
+
+        depends_on:
+            <<: *airflow-common-depends-on
+            airflow-init:
+                condition: service_completed_successfully
+        deploy:
+            resources:
+                limits:
+                    cpus: '2'
+                    memory: 2G
+                reservations:
+                    cpus: '2'
+                    memory: 2G
     
 
     airflow-triggerer:
@@ -142,6 +198,15 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
+
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.5'
+                    memory: 1G
+                reservations:
+                    cpus: '0.5'
+                    memory: 512M
 
     airflow-init:
         <<: *airflow-common
@@ -270,6 +335,14 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.5'
+                    memory: 1G
+                reservations:
+                    cpus: '0.5'
+                    memory: 512M
 
 volumes:
     postgres-db-volume:

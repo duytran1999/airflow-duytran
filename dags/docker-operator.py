@@ -12,7 +12,7 @@ default_args = {
 
 dag = DAG('docker_operator_test_cc_11232',
           default_args=default_args,
-          schedule_interval=None,
+          schedule="*/1 * * * *",
           start_date=days_ago(2)
           )
 dop = DockerOperator(
