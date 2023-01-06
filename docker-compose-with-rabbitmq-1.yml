@@ -50,14 +50,14 @@ services:
     rabbitmq:
         image: rabbitmq:management
         ports:
-          - '5672:5672'
-          - '15672:15672'
-    
+            - '5672:5672'
+            - '15672:15672'
+
         healthcheck:
-          test: rabbitmq-diagnostics -q ping
-          interval: 30s
-          timeout: 30s
-          retries: 3
+            test: rabbitmq-diagnostics -q ping
+            interval: 30s
+            timeout: 30s
+            retries: 3
         restart: always
 
     airflow-webserver:
@@ -103,7 +103,6 @@ services:
     airflow-worker-1:
         <<: *airflow-common
         command: celery worker
-            # - export DOCKER_HOST=tcp://docker-socket-proxy:2375
         healthcheck:
             test:
                 - "CMD-SHELL"
@@ -111,7 +110,6 @@ services:
             interval: 10s
             timeout: 10s
             retries: 5
-        
         environment:
             <<: *airflow-common-env
             # Required to handle warm shutdown of the celery workers properly
@@ -122,8 +120,6 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
-
-    
 
     airflow-triggerer:
         <<: *airflow-common
@@ -233,26 +229,6 @@ services:
             - bash
             - -c
             - airflow
-    
-    docker-socket-proxy:
-        image: tecnativa/docker-socket-proxy:latest
-        container_name: docker-socket-proxy
-        restart: always 
-        privileged: true
-        environment:
-            CONTAINERS: 1
-            IMAGES: 1
-            AUTH: 1
-            POST: 1
-            VOLUMES: 1
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-        ports:
-            - 2375:2375
-
-    # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
-    # or by explicitly targeted on the command line e.g. docker-compose up flower.
-    # See: https://docs.docker.com/compose/profiles/
     flower:
         <<: *airflow-common
         command: celery flower

@@ -1,0 +1,44 @@
+version: "3"
+services:
+  docker-socket-proxy:
+    image: devmtl/proxysocket:1.9.13
+    # networks:
+    #     - ntw_proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      # specific to 'docker stack deploy'
+      NETWORKS: 1
+      SERVICES: 1
+      TASKS: 1
+      SWARM: 1
+    ports:
+      - 2375:2375
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 8M
+        reservations:
+          cpus: "0.10"
+          memory: 6M
+    # image: tecnativa/docker-socket-proxy:0.1.1
+    # container_name: docker-socket-proxy
+    # restart: unless-stopped
+
+    # privileged: true
+    # volumes:
+    #     - /var/run/docker.sock:/var/run/docker.sock
+    # environment:
+    #     - CONTAINERS = '1'
+    #     - IMAGES= '1'
+    #     - AUTH= '1'
+    #     - POST = '1'
+    #     - NODES = '1'
+    # ports:
+    #     - 2375:2375
